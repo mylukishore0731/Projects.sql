@@ -1,59 +1,33 @@
-# Flight Reservation System Database
+# Crime Record & Investigation Database
 
-This repository contains the SQL scripts for creating and managing a Flight Reservation System database. Below are the details of the tables included in the database:
+## Overview
+This project implements a crime record and investigation database using ORACLE SQL DEVELOPER. It includes tables for officers, cases, suspects, and evidence, along with triggers to log evidence updates and views for common queries.
 
-## Tools Used
-- Oracle SQL: SQL DEVELOPER is used for designing, modeling, and administering the Flight Reservation System database.
-  
-## Airports Table
+## Database Schema
+- **Officers**: Stores officer details.
+- **Cases**: Stores case details including status and lead officer.
+- **Suspects**: Stores suspect details linked to cases.
+- **Evidence**: Stores evidence details linked to cases and officers.
+- **EvidenceUpdatesLog**: Logs updates to evidence.
 
-The Airports table stores information about airports.
+## Files
+- `crime_schema.sql`: Contains table creation and indexes.
+- `crime_views.sql`: Contains views for officer workload and unresolved cases.
+- `crime_sample_data.sql`: Contains sample data inserts for testing.
+- `crime_queries.sql`: Contains useful queries for data retrieval.
 
-### Columns:
-- AirportCode: VARCHAR(3) (Primary Key) - The unique code of the airport.
-- AirportName: VARCHAR(100) - The name of the airport.
-- City: VARCHAR(100) - The city where the airport is located.
+## Setup Instructions
+1. Install if not already installed.
+2. Create a new database for the project.
+3. Run the SQL scripts in the following order:
+   - `crime_schema.sql`
+   - `crime_views.sql`
+   - `crime_sample_data.sql`
+4. Use `crime_queries.sql` to run example queries.
 
-## Airlines Table
-
-The Airlines table stores information about airlines.
-
-### Columns:
-- AirlineCode: VARCHAR(3) (Primary Key) - The unique code of the airline.
-- AirlineName: VARCHAR(100) - The name of the airline.
-- Country: VARCHAR(100) - The country where the airline is based.
-
-## Flights Table
-
-The Flights table stores information about flights.
-
-### Columns:
-- FlightNumber: INT (Primary Key) - The unique number of the flight.
-- DepartureAirport: VARCHAR(3) (Foreign Key) - The code of the departure airport.
-- ArrivalAirport: VARCHAR(3) (Foreign Key) - The code of the arrival airport.
-- DepartureTime: DATETIME - The departure time of the flight.
-- ArrivalTime: DATETIME - The arrival time of the flight.
-- AvailableSeats: INT - The number of available seats on the flight.
-- AirlineCode: VARCHAR(3) (Foreign Key) - The code of the airline operating the flight.
-- Status: VARCHAR(20) - The status of the flight (e.g., Scheduled, On Time, Delayed).
-
-## Passengers Table
-
-The Passengers table stores information about passengers.
-
-### Columns:
-- PassengerID: INT (Primary Key) - The unique identifier of the passenger.
-- Name: VARCHAR(100) - The name of the passenger.
-- Email: VARCHAR(100) - The email address of the passenger.
-
-## Reservations Table
-
-The Reservations table stores information about flight reservations made by passengers.
-
-### Columns:
-- ReservationID: INT (Primary Key) - The unique identifier of the reservation.
-- FlightNumber: INT (Foreign Key) - The number of the flight for which the reservation is made.
-- PassengerID: INT (Foreign Key) - The identifier of the passenger making the reservation.
-- SeatNumber: VARCHAR(10) - The seat number assigned to the passenger for the flight.
-- ReservationDate: DATETIME - The date and time when the reservation was made.
+## Testing
+- Verify that tables are created successfully.
+- Verify that sample data is inserted.
+- Test triggers by updating evidence records and checking the `EvidenceUpdatesLog`.
+- Test views by querying `OfficerWorkload` and `UnresolvedCases`.
 
